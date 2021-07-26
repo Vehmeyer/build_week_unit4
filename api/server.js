@@ -1,7 +1,16 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
+
 const db = require('./data/db-config')
+
+// IMPORT ROUTERS
+
+// IMPORT MIDDLEWARE
+
+// LIST ROUTES
+
+// ADD ERROR HANDLING MIDDLEWARE
 
 function getAllUsers() { return db('users') }
 
