@@ -1,13 +1,9 @@
-
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('reservations').del()
     .then(function () {
-      // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('reservations').insert([
+        {reservation_id: 1, class_id: 1, user_id: 1},
+        {reservation_id: 2, class_id: 2, user_id: 1},
       ]);
     });
 };
