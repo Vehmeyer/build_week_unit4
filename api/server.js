@@ -5,15 +5,15 @@ const cors = require('cors')
 const db = require('./data/db-config')
 
 // IMPORT ROUTERS
+const authRouter = require('./authentication/authentication-router');
+// const usersRouter = require('');
+// const classesRouter = require('');
+// const reservationsRouter = require('');
 
-// IMPORT MIDDLEWARE
-
-// LIST ROUTES
-
-// ADD ERROR HANDLING MIDDLEWARE
-
+// CLEAN UP/REMOVE
 function getAllUsers() { return db('users') }
 
+// CLEAN UP/REMOVE
 async function insertUser(user) {
   // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
   // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
@@ -26,11 +26,22 @@ const server = express()
 server.use(express.json())
 server.use(helmet())
 server.use(cors())
+// server.use(cors({
+//   origin: '*'
+// }))
 
+// LIST ROUTES
+// server.use('/', authRouter);
+// server.use('/users', usersRouter);
+// server.use('/classes', classesRouter);
+// server.use('/reservations', reservationsRouter);
+
+// CLEAN UP/REMOVE
 server.get('/api/users', async (req, res) => {
   res.json(await getAllUsers())
 })
 
+// CLEAN UP/REMOVE
 server.post('/api/users', async (req, res) => {
   res.status(201).json(await insertUser(req.body))
 })
