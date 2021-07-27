@@ -1,28 +1,36 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const tokenBuilder = require('./token-builder');
-// build and import users model
-// build and import middleware
+const Users = require('../users/users-model');
+const {
+    checkPayload,
+    uniqueUsername,
+    checkLoginPayload,
+} = require('../middleware/authentication-middleware')
+
 
 router.post('/register', (req, res, next) => {
-    // middleware - 1 - check payload,  2- unique username
+    // add middleware - 1 - check payload,  2- unique username
+
+    console.log("POST - REGISTER end point connected")
+    next()
 
     // const { username, password, role_name } = req.body
 
     // const hash = bcrypt.hashSync(password, 8)
 
-    // Users.add({ username, password: hash, role_name } => {
+    // Users.add({ username, password: hash, role_name })
     //     .then(newUser => {
     //         res.status(200).json(newUser)
-    //       })
-    //       .catch(next) 
-    // })
-
-    console.log("POST - REGISTER end point connected")
-    next()
+    //     })
+    //     .catch(next) 
 })
+
 router.post('/login', (req, res, next) => {
     // middleware - 1 - check payload,  2- check login payload - for matching credentials
+
+    console.log("POST - LOGIN end point connected")
+    next()
 
     // const { username, password } = req.body
   
@@ -39,9 +47,6 @@ router.post('/login', (req, res, next) => {
     //     }
     // })
     // .catch(next)
-
-    console.log("POST - LOGIN end point connected")
-    next()
 })
 
 module.exports = router;

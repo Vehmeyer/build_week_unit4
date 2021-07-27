@@ -16,7 +16,7 @@ function getClients() {
 function getInstructors() {
     return db('users as u')
         .join('roles as r', 'u.role_id', 'r.role_id')
-        .where('u.role_id', 2)
+        .where('u.role_id', 1)
         .select('u.user_id', 'u.username', 'r.role_name')
 }
     
@@ -34,6 +34,11 @@ function findByUsername(username) {
         .where('username', username)
         .select('u.user_id', 'u.username', 'u.password', 'r.role_name')
         .first()
+}
+
+function validatePassword(password) {
+    return db('users')
+        .where('password', password)
 }
 
 async function add(user) {
@@ -55,6 +60,7 @@ module.exports = {
     getInstructors,
     findById,
     findByUsername,
+    validatePassword,
     add,
     remove,
 };
