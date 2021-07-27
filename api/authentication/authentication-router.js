@@ -30,7 +30,7 @@ router.post('/login', (req, res, next) => {
     // middleware - 1 - check payload,  2- check login payload - for matching credentials
 
     console.log("POST - LOGIN end point connected")
-    next()
+    // next()
 
     // async await?
     // try / catch vs. .then / .catch?
