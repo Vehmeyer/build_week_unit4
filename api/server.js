@@ -25,10 +25,10 @@ function getAllUsers() { return db('users') }
 const server = express()
 server.use(express.json())
 server.use(helmet())
-server.use(cors())
-// server.use(cors({
-//   origin: '*'
-// }))
+// server.use(cors())
+server.use(cors({
+  origin: '*'
+}))
 
 // LIST ROUTES
 server.use('/', authRouter);
