@@ -21,7 +21,7 @@ router.post('/register', (req, res, next) => {
 
     // Users.add({ username, password: hash, role_name })
     //     .then(newUser => {
-    //         res.status(200).json(newUser)
+    //         res.status(200).json(newUser) // expand on .json message?
     //     })
     //     .catch(next) 
 })
@@ -30,7 +30,10 @@ router.post('/login', (req, res, next) => {
     // middleware - 1 - check payload,  2- check login payload - for matching credentials
 
     console.log("POST - LOGIN end point connected")
-    next()
+    // next()
+
+    // async await?
+    // try / catch vs. .then / .catch?
 
     // const { username, password } = req.body
   
