@@ -6,24 +6,23 @@ const {
     checkPayload,
     uniqueUsername,
     checkLoginPayload,
+    convertRoleNameToId,
 } = require('../middleware/authentication-middleware')
 
 
-router.post('/register', (req, res, next) => {
-    // add middleware - 1 - check payload,  2- unique username
+router.post('/register', checkPayload, uniqueUsername, convertRoleNameToId, async (req, res, next) => {
+    try {
+        let user = req.body
+        const hash = bcrypt.hashSync(user.password, 8)
+        user.password = hash
 
-    // console.log("POST - REGISTER end point connected")
-    // next()
-
-    const { username, password, role_name } = req.body
-
-    const hash = bcrypt.hashSync(password, 8)
-
-    Users.add({ username, password: hash, role_name })
-        .then(newUser => {
-            res.status(200).json(newUser) // expand on .json message?
-        })
-        .catch(next) 
+        const newUser = await Users.add(req.body)
+        
+        const token = tokenBuilder(newUser)
+        res.status(201).json({user: newUser, token})
+    } catch (err) {
+        next(err)
+    }
 })
 
 router.post('/login', checkPayload, checkLoginPayload, async (req, res, next) => {
