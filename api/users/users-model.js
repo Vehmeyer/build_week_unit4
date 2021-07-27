@@ -30,8 +30,8 @@ function findById(user_id) {
 
 function findByUsername(username) {
     return db('users as u')
-        .join('roles as r', 'u.role_id', 'r.role_id')
         .where('username', username)
+        .join('roles as r', 'u.role_id', 'r.role_id')
         .select('u.user_id', 'u.username', 'u.password', 'r.role_name')
         .first()
 }
@@ -42,8 +42,14 @@ function validatePassword(password) {
 }
 
 async function add(user) {
-    const id = await db('users as u').insert(user)
-    return findById(id)
+    await db('users').insert(user)
+    return db('users as u')
+        .where('username', user.username)
+        .join('roles as r', 'u.role_id', 'r.role_id')
+        .select('u.user_id', 'u.username', 'r.role_name')
+
+    // const id = await db('users as u').insert(user)
+    // return findById(id)
 }
 
 async function remove(user_id) {
