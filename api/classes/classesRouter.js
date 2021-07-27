@@ -3,6 +3,10 @@
 const express = require('express')
 const router = express.Router()
 const Class = require("./classesModel")
+const {
+  validateUserId,
+  validateClassPayload,
+  validatePost} = require("../middleware/classesMiddleware")
 
 
 router.get("/api/classes", (req, res, next) => {
@@ -21,17 +25,24 @@ router.get("/api/classes/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/api/classes", (req, res, next) => {
-  const { username, password } = req.body
-  if(!username || !password) {
-    res.status(401).json({message:"username and password required"})
-  } else {
-    Class.add({username, password})
-    .then(newUser => {
-      res.status(201).json({message: `Welcome, ${newUser.username}`})
+router.post("/api/classes", validateClassPayload, validateUserId, async (req, res, next) => {
+  try {
+    const result = await Class.insert({
+      name: req.name,
+      type: req.type,
+      date: req.date,
+      start_time: req.start_time,
+      duration: req.duration,
+      intensity_level: req.intensity_level,
+      location: req.location,
+      number_registered: req.number_registered,
+      max_size: req.max_size,
+      user_id: req.user_id
     })
-    .catch(next)   
-  }  
+    res.status(201).json(result)
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.put("/api/classes/:id", (req, res, next) => {
