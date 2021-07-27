@@ -2,7 +2,7 @@ const Class = require("../classes/classesModel");
 
 async function validateUserId(req, res, next) {
   try {
-    const user = await Class.getById(req.params.id);
+    const user = await Class.getById(req.body.user_id);
     if (!user) {
       next({status: 404, message: "user not found"});
     } else {
@@ -14,18 +14,26 @@ async function validateUserId(req, res, next) {
       message: "problem finding user"
     })
   }
+}
 
-};
+function validateClassPayload(req, res, next) {
+  const { name,
+    type,
+    date,
+    start_time,
+    duration,
+    intensity_level,
+    location,
+    number_registered,
+    max_size,
+    user_id } = req.body
 
-function validateUser(req, res, next) {
-  const { name } = req.body;
-  if (!name || name.trim()) {
-    res.status(400).json({message: "missing required name field"})
+  if (!name || !type || !date || !start_time || !duration || !intensity_level || !location || !number_registered || !max_size || !user_id) {
+    res.status(401).json({message: "Make sure all fields are filled out"})
   } else {
-    req.name = name.trim();
-    next();
+    next()
   }
-};
+}
 
 function validatePost(req, res, next) {
   const { text } = req.body;
@@ -39,6 +47,6 @@ function validatePost(req, res, next) {
 
 module.exports = {
   validateUserId,
-  validateUser,
+  validateClassPayload,
   validatePost,
 };
