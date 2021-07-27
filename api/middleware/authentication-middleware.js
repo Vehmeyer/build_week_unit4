@@ -33,7 +33,7 @@ const checkLoginPayload = async (req, res, next) => {
         const user = await Users.findByUsername(req.body.username)
         const password = await Users.validatePassword(req.body.password)
         if (!user || !password) {
-            next({ status: 400, message: 'invalid credentials' })
+            next({ status: 404, message: 'invalid credentials' })
         } else {
             next()
         }
