@@ -18,7 +18,7 @@ const checkPayload = (req, res, next) => {
 const uniqueUsername = async (req, res, next) => {
     try {
         const existingUsername = await Users.findByUsername(req.body.username)
-        if (!existingUsername.length) {
+        if (!existingUsername) {
             next()
         } else {
             next({ status: 401, message: 'username taken' })
@@ -42,8 +42,31 @@ const checkLoginPayload = async (req, res, next) => {
     }
 }
 
+const convertRoleNameToId = (req, res, next) => {
+    if (!req.body.role_name) {
+        next({ status: 404, message: 'role required' })
+    } else {
+        if (req.body.role_name.toLowerCase() === 'instructor') {
+            req.body = {
+                username: req.body.username,
+                password: req.body.password,
+                role_id: 1, 
+            }
+            next()
+        } else if (req.body.role_name.toLowerCase() === 'client') {
+                req.body = {
+                    username: req.body.username,
+                    password: req.body.password,
+                    role_id: 2, 
+                }
+            next()
+        }
+    }
+}
+
 module.exports = {
     checkPayload,
     uniqueUsername,
     checkLoginPayload,
+    convertRoleNameToId,
 };

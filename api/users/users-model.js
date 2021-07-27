@@ -47,9 +47,7 @@ async function add(user) {
         .where('username', user.username)
         .join('roles as r', 'u.role_id', 'r.role_id')
         .select('u.user_id', 'u.username', 'r.role_name')
-
-    // const id = await db('users as u').insert(user)
-    // return findById(id)
+        .first()
 }
 
 async function remove(user_id) {
