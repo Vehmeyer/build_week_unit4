@@ -22,8 +22,8 @@ function getInstructors() {
     
 function findById(user_id) {
     return db('users as u')
-        .join('roles as r', 'u.role_id', 'r.role_id')
         .where('user_id', user_id)
+        .join('roles as r', 'u.role_id', 'r.role_id')
         .select('u.user_id', 'u.username', 'r.role_name')
         .first()
 }
@@ -54,7 +54,7 @@ async function remove(user_id) {
     const deletedUser = await findById(user_id)
     await db('users as u')
         .where('user_id', user_id)
-        .delete()
+        .del()
     return deletedUser
 }
 
