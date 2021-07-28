@@ -7,8 +7,9 @@ const db = require('./data/db-config')
 // IMPORT ROUTERS
 const authRouter = require('./authentication/authentication-router');
 // const usersRouter = require('');
-// const classesRouter = require('');
+ const classesRouter = require('./classes/classesRouter');
 // const reservationsRouter = require('');
+
 
 // CLEAN UP/REMOVE
 function getAllUsers() { return db('users') }
@@ -33,10 +34,14 @@ server.use(cors({
 // LIST ROUTES
 server.use('/', authRouter);
 // server.use('/users', usersRouter);
-// server.use('/classes', classesRouter);
+ server.use('/api/classes', classesRouter);
 // server.use('/reservations', reservationsRouter);
 
 // CLEAN UP/REMOVE
+
+
+
+
 server.get('/api/users', async (req, res) => {
   res.json(await getAllUsers())
 })

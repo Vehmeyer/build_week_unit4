@@ -15,6 +15,7 @@ function getById(id) {
 }
 
 
+
 function insert(user) {
   return db('users')
     .insert(user)
@@ -33,10 +34,40 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  return db('users')
+  return db('classes')
     .where('id', id)
     .del();
 }
+
+
+function timeAdd(classes, id){
+return db("clasess",id)
+.where("start_time")
+.insert("start_time")
+}
+
+
+function timeUpdate(classes ,id){
+return db("classes",  id)
+.where("start_time")
+.update({
+  status: 'archived',
+  thisKeyIsSkipped: undefined
+})
+
+
+
+
+
+function timeRemove(classes , id){
+  return db("classes", id)
+  .where("start_time")
+  .del()
+  }
+
+  
+
+
 
 
 module.exports = {
@@ -45,4 +76,7 @@ module.exports = {
   insert,
   update,
   remove,
+  timeUpdate,
+  timeRemove,
+  timeAdd,
 };

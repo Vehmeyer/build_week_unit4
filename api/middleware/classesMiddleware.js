@@ -37,6 +37,33 @@ function validatePost(req, res, next) {
   }
 };
 
+// request time
+function requestTime(req,res, next)
+const {time} = req.body;
+if (!time){
+  next({ status: 404, message: " schedule time does not exist " })
+  }
+  else{
+    req.time = time
+    next()
+}
+
+/// delete time
+function deleteTime(req, res, next) {
+  const {time} = req.body;
+  if(time){
+next({status: 200, message:" Time has been deleted"})
+  } else{
+  req.time = time;
+  next()
+}
+}
+
+
+
+
+
+
 module.exports = {
   validateUserId,
   validateUser,

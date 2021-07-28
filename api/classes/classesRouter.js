@@ -62,4 +62,33 @@ router.use((err, req, res, next) => { // eslint-disable-line
   });
 });
 
+
+
+router.post("/api/classes/:id", async (req, res, next) => {
+  try{
+    const posts = await Class.timeUpdate(req.params.id)
+    res.json(posts)
+  }catch(e){
+  res.status(500).json(e.message)  
+  next()
+  }}
+)
+
+
+router.delete("/api/classes/:id", async (req, res, next) => {
+  try{ 
+  const time = await  Class.timeRemove( req.params.id)
+  res.json(time)
+  }catch(e){
+  res.status(401).json(e.message)
+  }
+})
+
+
+
+
+
+
+
+
 module.exports = router
