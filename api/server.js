@@ -8,10 +8,10 @@ const db = require('./data/db-config')
 const authRouter = require('./authentication/authentication-router');
 const usersRouter = require('./users/users-router');
 // const classesRouter = require('');
-// const reservationsRouter = require('');
+const reservationsRouter = require('./reservations/reservations-router');
 
 // CLEAN UP/REMOVE
-function getAllUsers() { return db('users') }
+// function getAllUsers() { return db('users') }
 
 // CLEAN UP/REMOVE
 // async function insertUser(user) {
@@ -34,12 +34,12 @@ server.use(cors({
 server.use('/', authRouter);
 server.use('/users', usersRouter);
 // server.use('/classes', classesRouter);
-// server.use('/reservations', reservationsRouter);
+server.use('/reservations', reservationsRouter);
 
 // CLEAN UP/REMOVE
-server.get('/api/users', async (req, res) => {
-  res.json(await getAllUsers())
-})
+// server.get('/api/users', async (req, res) => {
+//   res.json(await getAllUsers())
+// })
 
 // CLEAN UP/REMOVE
 // server.post('/api/users', async (req, res) => {
