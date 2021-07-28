@@ -6,7 +6,7 @@ const db = require('./data/db-config')
 
 // IMPORT ROUTERS
 const authRouter = require('./authentication/authentication-router');
-// const usersRouter = require('');
+const usersRouter = require('./users/users-router');
 // const classesRouter = require('');
 // const reservationsRouter = require('');
 
@@ -32,7 +32,7 @@ server.use(cors({
 
 // LIST ROUTES
 server.use('/', authRouter);
-// server.use('/users', usersRouter);
+server.use('/users', usersRouter);
 // server.use('/classes', classesRouter);
 // server.use('/reservations', reservationsRouter);
 
