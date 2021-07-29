@@ -33,13 +33,8 @@ server.use(cors({
 // LIST ROUTES
 server.use('/', authRouter);
 server.use('/users', usersRouter);
-<<<<<<< HEAD
-// server.use('/classes', classesRouter);
+server.use('/classes', classesRouter);
 server.use('/reservations', reservationsRouter);
-=======
-server.use('/api/classes', classesRouter);
-// server.use('/reservations', reservationsRouter);
->>>>>>> classes
 
 // CLEAN UP/REMOVE
 // server.get('/api/users', async (req, res) => {
