@@ -1,8 +1,4 @@
-// COPY AND PASTED FROM NODE-API3-PROJECT WEEK 1 DAY 3
-
 const db = require('../data/db-config');
-
-
 
 function get() {
   return db('users');
@@ -13,7 +9,6 @@ function getById(id) {
     .where({ id })
     .first();
 }
-
 
 function insert(user) {
   return db('users')
@@ -37,7 +32,6 @@ function remove(id) {
     .where('id', id)
     .del();
 }
-
 
 module.exports = {
   get,

@@ -1,14 +1,6 @@
 const Users = require('../users/users-model');
 
 async function verifyUserId (res, req, next) {
-    // const user = await Users.findById(req.params.id)
-    // if (!user) {
-    //     next({ status: 404, message: "user not found" })
-    // } else {
-    //     req.user = user
-    //     next()
-    // }
-
     try {
         const user = await Users.findById(req.params.id)
         if (!user) {

@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const Reservations = require('./reservations-model');
-// const Users = require('./users-model');
 
 router.get('/', (res, req, next) => {
     try {
