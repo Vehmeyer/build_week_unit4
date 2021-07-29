@@ -1,12 +1,7 @@
 const router = require('express').Router();
 const Users = require('./users-model');
 const { verifyUserId } = require('../middleware/users-middleware');
-// const restricted = require('../middleware/restricted-middleware'); 
-// -- use cases where this is needed?
 
-// import user middleware
-
-// plug in middleware
 router.get('/', async (req, res, next) => {
     try { 
         const allUsers = await Users.getUsers()
@@ -34,26 +29,23 @@ router.get('/clients', async (req, res, next) => {
     }
 })
 
-router.get('/current', verifyUserId, async (req, res, next) => {
-    // console.log("GET current user connected")
-    // CONNECTION TEST SUCCESSFUL
-    res.status(200).json(req.user)
-    next()
-})
-
-// // GET current user?
-
-// router.put('/:id', async (req, res, next) => {
-//     // console.log("PUT request connected")
-//     // CONNECTION TEST SUCCESSFUL
-
-//     // try { 
-
-//     // } catch (err) {
-//     //     next(err)
-//     // }
+// // NEEDS TO BE TESTED
+// router.get('/current', verifyUserId, async (req, res, next) => {
+//     res.status(200).json(req.user)
+//     next()
 // })
 
+// // NEEDS TO BE TESTED
+// router.put('/:id', verifyUserId, async (req, res, next) => {
+//     try { 
+//         const updatedUser = await Users.update(req.params.id, req.body)
+//         res.status(202).json(updatedUser)
+//     } catch (err) {
+//         next(err)
+//     }
+// })
+
+// NEEDS TO BE TESTED
 // router.delete('/:id', verifyUserId, async (req, res, next) => {
 //     try { 
 //         await Users.remove(req.params.id)

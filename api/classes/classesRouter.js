@@ -1,5 +1,3 @@
-// REFERENCED NODE-API3-PROJECT WEEK 1 DAY 3
-
 const express = require('express')
 const router = express.Router()
 const Class = require("./classesModel")
@@ -64,7 +62,6 @@ router.delete("/:id", async (req, res, next) => {
     next(err)
   }
 })
-
 
 router.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({

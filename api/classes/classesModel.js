@@ -1,8 +1,4 @@
-// COPY AND PASTED FROM NODE-API3-PROJECT WEEK 1 DAY 3
-
 const db = require('../data/db-config');
-
-
 
 function get() {
   return db('classes');
@@ -37,7 +33,6 @@ function remove(class_id) {
     .where('id', class_id)
     .del();
 }
-
 
 module.exports = {
   get,
