@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Class = require("./classesModel")
 const {
-  validateClassId,
   validateClassPayload} = require("../middleware/classesMiddleware")
 
 

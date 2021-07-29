@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Users = require('./users-model');
-const { verifyUserId } = require('../middleware/users-middleware');
+//const { verifyUserId } = require('../middleware/users-middleware'); //COMMENTED OUT BECAUSE NO UNUSED VARIABLES
 
 router.get('/', async (req, res, next) => {
     try { 
