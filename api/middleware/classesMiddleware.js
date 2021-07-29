@@ -1,23 +1,24 @@
 const Class = require("../classes/classesModel");
 
-async function validateUserId(req, res, next) {
+async function validateClassId(req, res, next) {
   try {
-    const user = await Class.getById(req.body.user_id);
-    if (!user) {
-      next({status: 404, message: "user not found"});
+    const classes = await Class.getById(req.body);
+    if (!classes) {
+      next({status: 404, message: "class not found"});
     } else {
-      req.user = user;
+      req.classes = classes;
       next()
     }
   } catch (err) {
     res.status(500).json({
-      message: "problem finding user"
+      message: "problem finding classes"
     })
   }
 }
 
 function validateClassPayload(req, res, next) {
-  const { name,
+  const {
+    name,
     type,
     date,
     start_time,
@@ -37,6 +38,6 @@ function validateClassPayload(req, res, next) {
 
 
 module.exports = {
-  validateUserId,
+  validateClassId,
   validateClassPayload,
 };

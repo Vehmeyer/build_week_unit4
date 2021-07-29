@@ -5,36 +5,36 @@ const db = require('../data/db-config');
 
 
 function get() {
-  return db('users');
+  return db('classes');
 }
 
-function getById(id) {
-  return db('users')
-    .where({ id })
+function getById(class_id) {
+  return db('classes')
+    .where({ class_id })
     .first();
 }
 
 
-function insert(user) {
-  return db('users')
-    .insert(user)
+function insert(classes) {
+  return db('classes')
+    .insert(classes)
     .then(ids => {
       return getById(ids[0]);
     });
 }
 
-function update(id, changes) {
-  return db('users')
-    .where({ id })
+function update(class_id, changes) {
+  return db('classes')
+    .where({ class_id })
     .update(changes)
     .then(() => {
-      return getById(id);
+      return getById(class_id);
     });
 }
 
-function remove(id) {
-  return db('users')
-    .where('id', id)
+function remove(class_id) {
+  return db('classes')
+    .where('id', class_id)
     .del();
 }
 
