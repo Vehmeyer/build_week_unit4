@@ -4,13 +4,12 @@ const express = require('express')
 const router = express.Router()
 const Class = require("./classesModel")
 const {
-  validateUserId,
-  validateClassPayload,
-  validatePost} = require("../middleware/classesMiddleware")
+  validateClassId,
+  validateClassPayload} = require("../middleware/classesMiddleware")
 
 
-router.get("/api/classes", (req, res, next) => {
-  Class.find()
+router.get("/", (req, res, next) => {
+  Class.get()
   .then(classes => {
     res.json(classes)
   })
@@ -25,7 +24,8 @@ router.get("/api/classes/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/api/classes", validateClassPayload, validateUserId, async (req, res, next) => {
+router.post("/", validateClassPayload, async (req, res, next) => {
+  console.log('here')
   try {
     const result = await Class.insert({
       name: req.name,
@@ -45,10 +45,10 @@ router.post("/api/classes", validateClassPayload, validateUserId, async (req, re
   }
 })
 
-router.put("/api/classes/:id", (req, res, next) => {
-  Class.update(req.body.id)
+router.put("/:id", (req, res, next) => {
+  Class.update(req.params.class_id, {...req.changes})
     .then(() => {
-      return Class.getById(req.body.id)
+      return Class.getById(req.params.class_id)
     })
     .then(classes => {
       res.json(classes)
@@ -56,9 +56,9 @@ router.put("/api/classes/:id", (req, res, next) => {
     .catch(next)
 })
 
-router.delete("/api/classes/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    await Class.remove(req.body.id)
+    await Class.remove(req.params.class_id)
     res.json(req.classes)
   } catch (err) {
     next(err)

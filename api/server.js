@@ -6,8 +6,8 @@ const db = require('./data/db-config')
 
 // IMPORT ROUTERS
 const authRouter = require('./authentication/authentication-router');
-// const usersRouter = require('');
-// const classesRouter = require('');
+const usersRouter = require('./authentication/authentication-router');
+const classesRouter = require('./classes/classesRouter');
 // const reservationsRouter = require('');
 
 // CLEAN UP/REMOVE
@@ -32,8 +32,8 @@ server.use(cors({
 
 // LIST ROUTES
 server.use('/', authRouter);
-// server.use('/users', usersRouter);
-// server.use('/classes', classesRouter);
+server.use('/users', usersRouter);
+server.use('/api/classes', classesRouter);
 // server.use('/reservations', reservationsRouter);
 
 // CLEAN UP/REMOVE
