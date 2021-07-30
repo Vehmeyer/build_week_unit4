@@ -34,7 +34,7 @@ router.post("/", validateClassPayload, async (req, res, next) => {
       location: req.location,
       number_registered: req.number_registered,
       max_size: req.max_size,
-      user_id: req.user_id
+      user_id: req.params.user_id
     })
     res.status(201).json(result)
   } catch (err) {
