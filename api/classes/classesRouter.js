@@ -20,9 +20,8 @@ router.get("/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/", /*validateClassPayload*/ async (req, res, next) => {
-  console.log('here')
-  const result = await Class.insert({
+router.post("/", /*validateClassPayload*/ (req, res, next) => {
+Class.insert({
     name: req.name,
     type: req.type,
     date: req.date,
@@ -33,12 +32,10 @@ router.post("/", /*validateClassPayload*/ async (req, res, next) => {
     number_registered: req.number_registered,
     max_size: req.max_size,
     user_id: req.user_id
-  })
-  try {
+  }).then(result => {
     res.status(201).json(result)
-  } catch (err) {
-    next(err)
-  }
+  })
+  .catch(next)
 })
 
 router.put("/:id", (req, res, next) => {

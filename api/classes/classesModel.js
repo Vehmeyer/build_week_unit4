@@ -12,12 +12,10 @@ function getById(class_id) {
 
 
 function insert(classes) {
-  console.log("Inserting")
   return db('classes')
     .insert(classes)
     .then(class_id => {
-      console.log("CLASS ID", class_id)
-      return getById(class_id[0]);
+      return getById(class_id);
     });
 }
 
