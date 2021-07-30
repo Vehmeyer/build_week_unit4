@@ -15,7 +15,8 @@ function insert(classes) {
   return db('classes')
     .insert(classes)
     .then(class_id => {
-      return getById(parseInt(class_id));
+      return class_id;
+      //return getById(parseInt(class_id));
     });
 }
 
