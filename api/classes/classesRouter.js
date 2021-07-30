@@ -20,9 +20,9 @@ router.get("/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/", validateClassPayload, (req, res, next) => {
+router.post("/", validateClassPayload, async (req, res, next) => {
   console.log('here')
-  const result = Class.insert({
+  const result = await Class.insert({
     name: req.name,
     type: req.type,
     date: req.date,
