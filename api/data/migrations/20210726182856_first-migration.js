@@ -32,7 +32,7 @@ exports.up = async (knex) => {
             table.string('max_size', 200).notNullable()
             table.integer('user_id')
                 .unsigned()
-                .notNullable()
+                // .notNullable()
                 .references('user_id')
                 .inTable('users')
                 .onUpdate('CASCADE')

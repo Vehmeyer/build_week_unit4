@@ -27,9 +27,9 @@ function validateClassPayload(req, res, next) {
     location,
     number_registered,
     max_size,
-    user_id } = req.body
+     } = req.body
 
-  if (!name || !type || !date || !start_time || !duration || !intensity_level || !location || !number_registered || !max_size || !user_id) {
+  if (!name || !type || !date || !start_time || !duration || !intensity_level || !location || !number_registered || !max_size) {
     res.status(401).json({message: "Make sure all fields are filled out"})
   } else {
     next()
