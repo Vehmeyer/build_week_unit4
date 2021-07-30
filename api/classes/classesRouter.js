@@ -21,21 +21,22 @@ router.get("/api/classes/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/", /*validateClassPayload*/ async (req, res, next) => {
+router.post("/", /*validateClassPayload*/(req, res, next) => {
   console.log('here')
+  const result = Class.insert({
+    name: req.name,
+    type: req.type,
+    date: req.date,
+    start_time: req.start_time,
+    duration: req.duration,
+    intensity_level: req.intensity_level,
+    location: req.location,
+    number_registered: req.number_registered,
+    max_size: req.max_size,
+    // user_id: req.user_id
+  })
   try {
-    const result = await Class.insert({
-      name: req.name,
-      type: req.type,
-      date: req.date,
-      start_time: req.start_time,
-      duration: req.duration,
-      intensity_level: req.intensity_level,
-      location: req.location,
-      number_registered: req.number_registered,
-      max_size: req.max_size,
-      // user_id: req.user_id
-    })
+    
     res.status(201).json(result)
   } catch (err) {
     next(err)
