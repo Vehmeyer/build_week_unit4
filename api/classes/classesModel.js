@@ -15,7 +15,7 @@ function insert(classes) {
   return db('classes')
     .insert(classes)
     .then(class_id => {
-      return getById(class_id);
+      return getById(class_id[0]);
     });
 }
 
