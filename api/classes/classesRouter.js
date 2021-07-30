@@ -22,11 +22,11 @@ router.get("/api/classes/:id", (req, res, next) => {
 })
 
 router.post("/", /*validateClassPayload*/(req, res, next) => {
-  console.log('here')
   const {name, type, date, start_time, duration, intensity_level, location, number_registered, max_size} = req.body
   Class.insert({name, type, date, start_time, duration, intensity_level, location, number_registered, max_size})
     .then(({class_id}) => {
-      return Class.findById(class_id)
+      console.log(class_id)
+      return Class.getById(class_id)
     })
     .then(classes => {
       res.status(201).json(classes)
