@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Class = require("./classesModel")
-const {validateClassPayload} = require("../middleware/classesMiddleware")
+// const {validateClassPayload} = require("../middleware/classesMiddleware")
 
 
 router.get("/", (req, res, next) => {
@@ -20,7 +20,7 @@ router.get("/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/", validateClassPayload, async (req, res, next) => {
+router.post("/", /*validateClassPayload*/ async (req, res, next) => {
   console.log('here')
   const result = await Class.insert({
     name: req.name,

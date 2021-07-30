@@ -12,7 +12,7 @@ function getById(class_id) {
 
 
 function insert(classes) {
-  console.log("Inserting", classes)
+  console.log("Inserting",)
   return db('classes')
     .insert(classes)
     .then(class_id => {
