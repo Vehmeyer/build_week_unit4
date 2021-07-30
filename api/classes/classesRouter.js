@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Class = require("./classesModel")
-const {
-  validateClassPayload} = require("../middleware/classesMiddleware")
+const {validateClassPayload} = require("../middleware/classesMiddleware")
 
 
 router.get("/", (req, res, next) => {
@@ -13,31 +12,39 @@ router.get("/", (req, res, next) => {
   .catch(next)
 })
 
-router.get("/api/classes/:id", (req, res, next) => {
-  Class.findById()
+router.get("/:id", (req, res, next) => {
+  Class.findById(req.params.id)
   .then(classes => {
     res.json(classes)
   })
   .catch(next)
 })
 
-router.post("/", /*validateClassPayload*/(req, res, next) => {
-  const {name, type, date, start_time, duration, intensity_level, location, number_registered, max_size} = req.body
-  Class.insert({name, type, date, start_time, duration, intensity_level, location, number_registered, max_size})
-    .then(({class_id}) => {
-      console.log(class_id)
-      return Class.getById(class_id)
-    })
-    .then(classes => {
-      res.status(201).json(classes)
-    })
-    .catch(next)
+router.post("/", validateClassPayload, (req, res, next) => {
+  console.log('here')
+  const result = Class.insert({
+    name: req.name,
+    type: req.type,
+    date: req.date,
+    start_time: req.start_time,
+    duration: req.duration,
+    intensity_level: req.intensity_level,
+    location: req.location,
+    number_registered: req.number_registered,
+    max_size: req.max_size,
+    user_id: req.user_id
+  })
+  try {
+    res.status(201).json(result)
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.put("/:id", (req, res, next) => {
-  Class.update(req.params.class_id, {...req.changes})
+  Class.update(req.params.id, {...req.changes})
     .then(() => {
-      return Class.getById(req.params.class_id)
+      return Class.getById(req.params.id)
     })
     .then(classes => {
       res.json(classes)
@@ -47,7 +54,7 @@ router.put("/:id", (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    await Class.remove(req.params.class_id)
+    await Class.remove(req.params.id)
     res.json(req.classes)
   } catch (err) {
     next(err)

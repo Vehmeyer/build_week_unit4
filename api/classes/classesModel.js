@@ -1,5 +1,4 @@
 const db = require('../data/db-config');
-// const { findById } = require('../users/users-model');
 
 function get() {
   return db('classes');
@@ -12,15 +11,13 @@ function getById(class_id) {
 }
 
 
-async function insert(classes) {
-  const [class_id] = await db('classes')
-  .insert(classes)
-  return get().where({class_id}).first(0)
-  // return db('classes')
-  //   .insert(classes)
-  //   .then(class_id => {
-  //     return getById(class_id[0]);
-  //   });
+function insert(classes) {
+  return db('classes')
+    .insert(classes)
+    .then(class_id => {
+      console.log("CLASS ID", class_id)
+      return getById(class_id[0]);
+    });
 }
 
 function update(class_id, changes) {
