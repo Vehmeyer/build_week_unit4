@@ -21,7 +21,7 @@ router.get("/api/classes/:id", (req, res, next) => {
   .catch(next)
 })
 
-router.post("/", validateClassPayload, async (req, res, next) => {
+router.post("/", /*validateClassPayload*/ async (req, res, next) => {
   console.log('here')
   try {
     const result = await Class.insert({
