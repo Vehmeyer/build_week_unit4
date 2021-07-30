@@ -22,16 +22,16 @@ router.get("/:id", (req, res, next) => {
 
 router.post("/", /*validateClassPayload*/ (req, res, next) => {
 Class.insert({
-    name: req.name,
-    type: req.type,
-    date: req.date,
-    start_time: req.start_time,
-    duration: req.duration,
-    intensity_level: req.intensity_level,
-    location: req.location,
-    number_registered: req.number_registered,
-    max_size: req.max_size,
-    user_id: req.user_id
+    name: req.body.name,
+    type: req.body.type,
+    date: req.body.date,
+    start_time: req.body.start_time,
+    duration: req.body.duration,
+    intensity_level: req.body.intensity_level,
+    location: req.body.location,
+    number_registered: req.body.number_registered,
+    max_size: req.body.max_size,
+    user_id: req.body.user_id
   }).then(result => {
     res.status(201).json(result)
   })
